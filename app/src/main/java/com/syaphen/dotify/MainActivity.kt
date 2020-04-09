@@ -1,4 +1,4 @@
-package com.example.dotify
+package com.syaphen.dotify
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

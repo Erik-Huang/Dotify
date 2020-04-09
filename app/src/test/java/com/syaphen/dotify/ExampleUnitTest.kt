@@ -1,4 +1,4 @@
-package com.example.dotify
+package com.syaphen.dotify
 
 import org.junit.Test
 
