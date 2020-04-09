@@ -21,45 +21,101 @@
         app:layout_constraintVertical_bias="0.0">
 
         <Button
-            android:id="@+id/submit_btn"
+            android:id="@+id/submitBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="submitClicked"
-            android:text="submit"
+            android:text="APPLY"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/usernameDisplay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextContent"
+            android:text="Username"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/usernameInput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Enter your name"
             android:inputType="textPersonName"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/usernameDisplay" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/playCountDisplay"
             android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="150dp"
-            android:layout_marginBottom="300dp"
-            android:text="Current Display"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:text="Count plays"
             android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="28sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/albumDisplay" />
+
+        <Button
+            android:id="@+id/changeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CHANGE USER"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/albumDisplay"
+            android:layout_width="0dp"
+            android:layout_height="350dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="80dp"
+            app:srcCompat="@drawable/strangers_cover_art"
+            android:scaleType="fitXY"
+            />
+
+        <ImageButton
+            android:id="@+id/playBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/playCountDisplay"
+            android:layout_marginTop="20dp"
+            app:srcCompat="@drawable/ic_play" />
+
+        <ImageButton
+            android:id="@+id/nextBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:background="#00FFFFFF"
+            app:layout_constraintHorizontal_bias="0.763"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/playCountDisplay"
+            app:srcCompat="@drawable/ic_next" />
+
+        <ImageButton
+            android:id="@+id/prevBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:background="#00FFFFFF"
+            app:layout_constraintHorizontal_bias="0.213"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/playCountDisplay"
+            app:srcCompat="@drawable/ic_previous" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
