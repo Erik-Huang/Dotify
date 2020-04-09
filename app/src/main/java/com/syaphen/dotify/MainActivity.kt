@@ -1,5 +1,6 @@
 package com.syaphen.dotify
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -13,8 +14,8 @@ class MainActivity : AppCompatActivity() {
 
     private val defaultUsername = "Anonymous User"
     private var currentUsername = "Not logged in"
-    private val albumTitleTemp = "Strangers"
-    private val albumDescTemp = "\"Strangers\" (with Myon & Shane 54 featuring Tove Lo)"
+    private val albumTitleTemp = "Dark Souls III OST"
+    private val albumDescTemp = "Dark Souls 3 Official OST - Gamescom 2015 Trailer Music"
     private var playCount = Random.nextInt(100, 500)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +40,10 @@ class MainActivity : AppCompatActivity() {
         }
         nextBtn.setOnClickListener { v: View ->
             nextTrack(v)
+        }
+        albumDisplay.setOnLongClickListener{ v: View ->
+            changeColor(v)
+            return@setOnLongClickListener true
         }
     }
 
@@ -66,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         usernameDisplay.visibility = View.GONE
     }
 
-    fun updateUsername(view: View) {
+    private fun updateUsername(view: View) {
         changeBtn.text = "CHANGE USER"
         changeBtn.setOnClickListener { v: View ->
             promptUsernameMenu(v)
@@ -75,9 +80,24 @@ class MainActivity : AppCompatActivity() {
         usernameDisplay.visibility = View.VISIBLE
         currentUsername = usernameInput.text.toString()
         usernameInput.text.clear()
-        usernameDisplay.text = currentUsername
+        if (currentUsername == "") {
+            Toast.makeText(this, "Invalid Username!", Toast.LENGTH_SHORT).show()
+        } else {
+            usernameDisplay.text = currentUsername
+            Toast.makeText(this, "Hello $currentUsername", Toast.LENGTH_SHORT).show()
+        }
+    }
 
-        val myMsg = "Hello $currentUsername"
-        Toast.makeText(this, myMsg, Toast.LENGTH_SHORT).show()
+    private fun changeColor(view: View) {
+        val c = Color.parseColor("#0aad3f") // Green tint
+        playCountDisplay.setTextColor(c)
+        albumTitle.setTextColor(c)
+        albumDescription.setTextColor(c)
+        usernameInput.setTextColor(c)
+        usernameInput.setHintTextColor(c)
+        usernameDisplay.setTextColor(c)
+        changeBtn.setTextColor(c)
+        nextBtn.setColorFilter(c)
+        prevBtn.setColorFilter(c)
     }
 }
