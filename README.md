@@ -1,7 +1,7 @@
 
 # Dotify by Erik Huang
 
-This is a social media app that can upload images.
+This is a music app that doesn't play music (yet). It allows you to stare at an album cover tho.
 
 ## Extra credit
 I have attempted extra credit #1, #2, and #5
