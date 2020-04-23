@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_song_list.*
 import kotlin.random.Random
 
-class MainActivity : AppCompatActivity() {
+class SongPlayerActivity : AppCompatActivity() {
 
     private val defaultUsername = "Anonymous User"
     private var currentUsername = "Not logged in"
