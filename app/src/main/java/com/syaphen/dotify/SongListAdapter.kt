@@ -14,6 +14,7 @@ class SongListAdapter(initialListOfSongs: List<Song>): RecyclerView.Adapter<Song
 
     private var listOfSongs: List<Song> = initialListOfSongs.toList() // duplicate the list
     var onSongClickListener: ((song: Song) -> Unit)? = null
+    var onSongLongPressListener: ((song: Song) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_song, parent, false)
@@ -29,18 +30,14 @@ class SongListAdapter(initialListOfSongs: List<Song>): RecyclerView.Adapter<Song
     }
 
     fun change (newListOfSongs: List<Song>) {
-        // Normal way up applying updates to list
-        //listOfPeople = newPeople
-        //notifyDataSetChanged()
-
         // Animated way of applying updates to list
         val callback = SongDiffCallback(listOfSongs, newListOfSongs)
         val diffResult = DiffUtil.calculateDiff(callback)
         diffResult.dispatchUpdatesTo(this)
-
-        // We update the list
+        // Update the list
         listOfSongs = newListOfSongs
-
+        // Update the activity
+        notifyDataSetChanged()
     }
 
     inner class SongViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -54,6 +51,10 @@ class SongListAdapter(initialListOfSongs: List<Song>): RecyclerView.Adapter<Song
             albumCover.setImageResource(song.smallImageID)
             itemView.setOnClickListener {
                 onSongClickListener?.invoke(song)
+            }
+            itemView.setOnLongClickListener {
+                onSongLongPressListener?.invoke(song)
+                return@setOnLongClickListener true
             }
         }
     }

@@ -34,6 +34,14 @@ class SongListActivity : AppCompatActivity() {
             songPlaying = currentSong
         }
 
+        // Delete item on long press
+        songListAdapter.onSongLongPressListener = { currentSong: Song ->
+            Toast.makeText(this, "${currentSong.title} removed", Toast.LENGTH_SHORT).show()
+            listOfSongs.remove(currentSong)
+            songListAdapter.change(listOfSongs)
+        }
+
+        // Navigating to the main player activity
         miniPlayer.setOnClickListener {
             val intent = Intent(this, SongPlayerActivity::class.java)
             intent.putExtra(SONG_KEY, songPlaying)
@@ -42,7 +50,7 @@ class SongListActivity : AppCompatActivity() {
 
         // Shuffle feature
         shuffleButton.setOnClickListener {
-            val newListOfSongs = listOfSongs.apply {
+            var newListOfSongs = listOfSongs.apply {
                 shuffle()
             }
             songListAdapter.change(newListOfSongs)

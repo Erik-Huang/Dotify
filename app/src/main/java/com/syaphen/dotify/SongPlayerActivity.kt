@@ -4,6 +4,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -34,11 +35,20 @@ class SongPlayerActivity : AppCompatActivity() {
         albumDisplay.setImageResource(songPlaying.largeImageID)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun initUI() {
         albumTitle.text = albumTitleTemp
         albumDescription.text = albumDescTemp
         usernameDisplay.text = defaultUsername
         playCountDisplay.text = "$playCount Plays"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         changeBtn.setOnClickListener { v: View ->
             promptUsernameMenu(v)
         }
