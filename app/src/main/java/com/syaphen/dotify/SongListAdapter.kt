@@ -41,7 +41,6 @@ class SongListAdapter(initialListOfSongs: List<Song>): RecyclerView.Adapter<Song
         // We update the list
         listOfSongs = newListOfSongs
 
-
     }
 
     inner class SongViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

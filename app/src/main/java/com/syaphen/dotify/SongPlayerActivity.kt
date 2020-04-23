@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import com.ericchee.songdataprovider.Song
 import com.ericchee.songdataprovider.SongDataProvider
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_song_list.*
@@ -24,7 +25,13 @@ class SongPlayerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initUI()
-        Toast.makeText(this, "runs?", Toast.LENGTH_SHORT).show()
+        // Grab data from Intent's Extras
+        val songPlaying = intent.getParcelableExtra<Song>(SONG_KEY)
+        Log.i("erik", songPlaying.title)
+        Log.i("erik", songPlaying.largeImageID.toString())
+        albumTitle.text = songPlaying.title
+        albumDescription.text = songPlaying.artist
+        albumDisplay.setImageResource(songPlaying.largeImageID)
     }
 
     private fun initUI() {
@@ -96,5 +103,10 @@ class SongPlayerActivity : AppCompatActivity() {
         changeBtn.setTextColor(c)
         nextBtn.setColorFilter(c)
         prevBtn.setColorFilter(c)
+    }
+
+    companion object {
+        // Keys for intents
+        const val SONG_KEY = "song_key"
     }
 }
