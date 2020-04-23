@@ -3,4 +3,9 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="mainTheme">#2efcb4</color>
+    <color name="mainThemeFont">#ffffff</color>
+    <color name="mainThemeDarker">#11cf8c</color>
+    <color name="mainThemeLighter">#9cf0d2</color>
+
 </resources>
