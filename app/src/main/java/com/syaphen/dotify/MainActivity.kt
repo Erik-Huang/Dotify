@@ -7,7 +7,9 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import com.ericchee.songdataprovider.SongDataProvider
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_song_list.*
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -17,12 +19,12 @@ class MainActivity : AppCompatActivity() {
     private val albumTitleTemp = "Dark Souls III OST"
     private val albumDescTemp = "Dark Souls 3 Official OST - Gamescom 2015 Trailer Music"
     private var playCount = Random.nextInt(100, 500)
-    private val change = 10
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initUI()
+        Toast.makeText(this, "runs?", Toast.LENGTH_SHORT).show()
     }
 
     private fun initUI() {
