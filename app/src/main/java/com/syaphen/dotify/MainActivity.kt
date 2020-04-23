@@ -37,10 +37,10 @@ class MainActivity : AppCompatActivity() {
             incPlayCount(v)
         }
         prevBtn.setOnClickListener { v: View ->
-            previousTrack(v)
+            changeTrack(v, "Skipping to previous track")
         }
         nextBtn.setOnClickListener { v: View ->
-            nextTrack(v)
+            changeTrack(v, "Skipping to next track")
         }
         albumDisplay.setOnLongClickListener{ v: View ->
             changeColor(v)
@@ -48,13 +48,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun previousTrack(view: View) {
-        val msg = "Skipping to previous track"
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun nextTrack(view: View) {
-        val msg = "Skipping to next track"
+    private fun changeTrack(view: View, msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
