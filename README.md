@@ -7,8 +7,8 @@ This is a music app that pops out a list of songs at home screen. The user can s
 I have attempted extra credit #1, #2, and #3
 
 ## Screenshots
-<img src="./songList.png" alt="Screenshot of the song list screen" height="500" />
-<img src="./songPlayer.png" alt="Screenshot of the song player screen" height="500" />
+<img src="./songList.PNG" alt="Screenshot of the song list screen" height="500" />
+<img src="./songPlayer.PNG" alt="Screenshot of the song player screen" height="500" />
 
 ## Installation & Usage
 
