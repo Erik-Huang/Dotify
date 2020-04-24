@@ -1,5 +1,6 @@
 package com.syaphen.dotify
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,7 @@ import com.ericchee.songdataprovider.Song
 
 class SongListAdapter(initialListOfSongs: List<Song>): RecyclerView.Adapter<SongListAdapter.SongViewHolder>() {
 
-    private var listOfSongs: List<Song> = initialListOfSongs.toList() // duplicate the list
+    var listOfSongs: List<Song> = initialListOfSongs.toList() // duplicate the list
     var onSongClickListener: ((song: Song) -> Unit)? = null
     var onSongLongPressListener: ((song: Song) -> Unit)? = null
 
@@ -33,11 +34,8 @@ class SongListAdapter(initialListOfSongs: List<Song>): RecyclerView.Adapter<Song
         // Animated way of applying updates to list
         val callback = SongDiffCallback(listOfSongs, newListOfSongs)
         val diffResult = DiffUtil.calculateDiff(callback)
+        listOfSongs = newListOfSongs.toList()
         diffResult.dispatchUpdatesTo(this)
-        // Update the list
-        listOfSongs = newListOfSongs
-        // Update the activity
-        notifyDataSetChanged()
     }
 
     inner class SongViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

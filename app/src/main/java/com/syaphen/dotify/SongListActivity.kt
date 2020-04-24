@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
+import androidx.recyclerview.widget.DiffUtil
 import com.ericchee.songdataprovider.Song
 import com.ericchee.songdataprovider.SongDataProvider
 import com.syaphen.dotify.SongPlayerActivity.Companion.SONG_KEY
@@ -13,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_song_list.*
 class SongListActivity : AppCompatActivity() {
 
     private val activityTitle = "All Songs"
-    private lateinit var songPlaying: Song
+    private var songPlaying: Song? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +33,7 @@ class SongListActivity : AppCompatActivity() {
         songListAdapter.onSongClickListener = { currentSong: Song ->
             val displayedInfo = currentSong.title + " - " + currentSong.artist
             song_info_miniPlayer.text = displayedInfo
+
             songPlaying = currentSong
         }
 
@@ -43,17 +46,18 @@ class SongListActivity : AppCompatActivity() {
 
         // Navigating to the main player activity
         miniPlayer.setOnClickListener {
-            val intent = Intent(this, SongPlayerActivity::class.java)
-            intent.putExtra(SONG_KEY, songPlaying)
-            startActivity(intent)
+            if (songPlaying != null) {
+                val intent = Intent(this, SongPlayerActivity::class.java)
+                intent.putExtra(SONG_KEY, songPlaying)
+                startActivity(intent)
+            }
         }
 
         // Shuffle feature
         shuffleButton.setOnClickListener {
-            var newListOfSongs = listOfSongs.apply {
-                shuffle()
-            }
+            var newListOfSongs = listOfSongs.apply { shuffle() }
             songListAdapter.change(newListOfSongs)
+            songListRecyclerView.scrollToPosition(0)
         }
 
         // Connect adapter
