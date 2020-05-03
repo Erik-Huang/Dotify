@@ -16,6 +16,7 @@ class SongListActivity : AppCompatActivity() {
 
     private val activityTitle = "All Songs"
     private var songPlaying: Song? = null
+    private var change = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
