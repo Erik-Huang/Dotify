@@ -4,7 +4,8 @@
 This is a music app that pops out a list of songs at home screen. The user can shuffle the list, remove songs by long pressing on any song. Clicking on the mini play at the bottom brings the user into the song player screen.
 
 ## Extra credit
-I have attempted extra credit #1, #2, and #3
+HW2: I have attempted extra credit #1, #2, and #3
+hw3: None
 
 ## Screenshots
 <img src="./songList.PNG" alt="Screenshot of the song list screen" height="500" />
