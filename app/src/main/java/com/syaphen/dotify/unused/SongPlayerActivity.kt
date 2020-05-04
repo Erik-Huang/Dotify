@@ -1,4 +1,4 @@
-package com.syaphen.dotify
+package com.syaphen.dotify.unused
 
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.ericchee.songdataprovider.Song
+import com.syaphen.dotify.R
 import kotlinx.android.synthetic.main.activity_song_player.*
 import kotlin.random.Random
 

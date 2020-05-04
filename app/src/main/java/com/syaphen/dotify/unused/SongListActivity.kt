@@ -1,14 +1,14 @@
-package com.syaphen.dotify
+package com.syaphen.dotify.unused
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import com.ericchee.songdataprovider.Song
 import com.ericchee.songdataprovider.SongDataProvider
-import com.syaphen.dotify.SongPlayerActivity.Companion.SONG_KEY
+import com.syaphen.dotify.R
+import com.syaphen.dotify.SongListAdapter
+import com.syaphen.dotify.unused.SongPlayerActivity.Companion.SONG_KEY
 import kotlinx.android.synthetic.main.activity_song_list.*
 
 class SongListActivity : AppCompatActivity() {

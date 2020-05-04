@@ -9,15 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-        <activity android:name=".MasterMainActivity">
+        <activity android:name=".activity.MasterMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SongListActivity"></activity>
-        <activity android:name=".SongPlayerActivity"></activity>
+        <activity android:name=".unused.SongListActivity"></activity>
+        <activity android:name=".unused.SongPlayerActivity"></activity>
     </application>
 
 </manifest>

@@ -20,15 +20,8 @@ class SongListFragment : Fragment() {
     private var onSongClickListener: OnSongClickListener? = null
     private lateinit var songList: List<Song>
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        if (context is OnSongClickListener) {
-            onSongClickListener = context
-        }
-    }
-
     companion object {
+        val TAG: String = SongListFragment::class.java.simpleName
         const val SONG_LIST = "song_list"
     }
 
@@ -63,6 +56,14 @@ class SongListFragment : Fragment() {
         songListRecyclerView.adapter = songListAdapter
         songListAdapter.onSongClickListener = { currentSong ->
             onSongClickListener?.onSongClicked(currentSong)
+        }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        if (context is OnSongClickListener) {
+            onSongClickListener = context
         }
     }
 

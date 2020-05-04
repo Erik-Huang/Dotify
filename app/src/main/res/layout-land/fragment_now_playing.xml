@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@color/mainTheme"
-    tools:context=".SongPlayerActivity">
+    android:background="@drawable/gradient_color"
+    tools:context=".unused.SongPlayerActivity">
 
     <ImageView
         android:id="@+id/albumDisplay"

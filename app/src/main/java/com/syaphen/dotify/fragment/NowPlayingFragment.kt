@@ -1,6 +1,7 @@
 package com.syaphen.dotify.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,26 +28,17 @@ class NowPlayingFragment : Fragment() {
         super.onCreate(savedInstanceState)
         if (savedInstanceState != null) {
             with(savedInstanceState) {
-                val song: Song? = getParcelable(SONG_KEY)
-                if (song != null) {
-                    songPlaying = song
-                }
                 playCount = getInt(PLAY_COUNT)
             }
         } else {
-            arguments?.let { args ->
-                val song = args.getParcelable<Song>(SONG_KEY)
-                if (song != null) {
-                    songPlaying = song
-                }
-                playCount = Random.nextInt(0, 500)
+            playCount = Random.nextInt(0, 500)
+        }
+        arguments?.let { args ->
+            val song = args.getParcelable<Song>(SONG_KEY)
+            if (song != null) {
+                songPlaying = song
             }
         }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initUI()
     }
 
     override fun onCreateView(
@@ -57,12 +49,14 @@ class NowPlayingFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_now_playing, container, false)
     }
 
-    fun updateSong(song: Song) {
-        songPlaying = song
-        albumTitle.text = song.title
-        albumDescription.text = song.artist
-        playCountDisplay.text = "$playCount Plays"
-        albumDisplay.setImageResource(song.largeImageID)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initUI()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(PLAY_COUNT, playCount)
     }
 
     private fun initUI() {
@@ -88,5 +82,13 @@ class NowPlayingFragment : Fragment() {
 
     private fun changeTrack(view: View, msg: String) {
         // TODO
+    }
+
+    fun updateSong(song: Song) {
+        songPlaying = song
+        albumTitle.text = song.title
+        albumDescription.text = song.artist
+        playCountDisplay.text = "$playCount Plays"
+        albumDisplay.setImageResource(song.largeImageID)
     }
 }

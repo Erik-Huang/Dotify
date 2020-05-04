@@ -1,16 +1,19 @@
-package com.syaphen.dotify
+package com.syaphen.dotify.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View.*
 import androidx.fragment.app.FragmentTransaction
 import com.ericchee.songdataprovider.*
+import com.syaphen.dotify.OnSongClickListener
+import com.syaphen.dotify.R
 import com.syaphen.dotify.fragment.*
 import com.syaphen.dotify.fragment.NowPlayingFragment.Companion.SONG_KEY
-import com.syaphen.dotify.fragment.NowPlayingFragment.Companion.TAG
 import kotlinx.android.synthetic.main.activity_master_main.*
 
-class MasterMainActivity : AppCompatActivity(), OnSongClickListener {
+class MasterMainActivity : AppCompatActivity(),
+    OnSongClickListener {
 
     private var songPlaying: Song? = null
 
@@ -29,9 +32,9 @@ class MasterMainActivity : AppCompatActivity(), OnSongClickListener {
         } else {
             val songListFragment = SongListFragment() // The view of the list of songs
             commitSongListFragment(songListFragment)
-            initializeMiniPlayer(songListFragment)
         }
-        // MiniPlayer & Back Button display
+        initializeMiniPlayer()
+        // Handle MiniPlayer & Back Button: switching between fragments
         supportFragmentManager.addOnBackStackChangedListener {
             if(supportFragmentManager.backStackEntryCount > 0) {
                 miniPlayer.visibility = GONE
@@ -41,13 +44,27 @@ class MasterMainActivity : AppCompatActivity(), OnSongClickListener {
                 supportActionBar?.setDisplayHomeAsUpEnabled(false)
             }
         }
+        // Handle MiniPlayer & Back Button: Rotating in NowPlayingFragment
         if(supportFragmentManager.backStackEntryCount > 0) {
             miniPlayer.visibility = GONE
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
+        Log.i("erik", "DONE")
     }
 
-    private fun getNowPlayingFragment() = supportFragmentManager.findFragmentByTag(TAG) as? NowPlayingFragment
+    // set listener on the mini Player and the shuffle button
+    private fun initializeMiniPlayer() {
+        miniPlayer.setOnClickListener {
+            commitNowPlayingFragment()
+        }
+        // Shuffle feature
+        shuffleButton.setOnClickListener {
+            getSongListFragment()?.shuffleSongList()
+        }
+    }
+
+    private fun getSongListFragment() = supportFragmentManager.findFragmentById(R.id.fragContainer) as? SongListFragment
+    private fun getNowPlayingFragment() = supportFragmentManager.findFragmentByTag(NowPlayingFragment.TAG) as? NowPlayingFragment
 
     private fun commitSongListFragment(songListFragment: SongListFragment) {
         // Fetch song list and send to the fragment as an argument
@@ -79,23 +96,9 @@ class MasterMainActivity : AppCompatActivity(), OnSongClickListener {
             supportFragmentManager
                 .beginTransaction()
                 .add(R.id.fragContainer, nowPlayingFragment)
-                .addToBackStack("now playing")
+                .addToBackStack(NowPlayingFragment.TAG)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit()
-        }
-    }
-
-    // set listener on the mini Player and the shuffle button
-    private fun initializeMiniPlayer(songListFragment: SongListFragment) {
-        miniPlayer.setOnClickListener {
-            if(songPlaying != null) {
-                miniPlayer.visibility = INVISIBLE
-                commitNowPlayingFragment()
-            }
-        }
-        // Shuffle feature
-        shuffleButton.setOnClickListener {
-            songListFragment.shuffleSongList()
         }
     }
 
