@@ -49,7 +49,6 @@ class MasterMainActivity : AppCompatActivity(),
             miniPlayer.visibility = GONE
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
-        Log.i("erik", "DONE")
     }
 
     // set listener on the mini Player and the shuffle button
@@ -64,6 +63,7 @@ class MasterMainActivity : AppCompatActivity(),
     }
 
     private fun getSongListFragment() = supportFragmentManager.findFragmentById(R.id.fragContainer) as? SongListFragment
+
     private fun getNowPlayingFragment() = supportFragmentManager.findFragmentByTag(NowPlayingFragment.TAG) as? NowPlayingFragment
 
     private fun commitSongListFragment(songListFragment: SongListFragment) {
