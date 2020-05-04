@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
-import androidx.recyclerview.widget.DiffUtil
 import com.ericchee.songdataprovider.Song
 import com.ericchee.songdataprovider.SongDataProvider
 import com.syaphen.dotify.SongPlayerActivity.Companion.SONG_KEY
@@ -16,7 +15,6 @@ class SongListActivity : AppCompatActivity() {
 
     private val activityTitle = "All Songs"
     private var songPlaying: Song? = null
-    private var change = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +22,7 @@ class SongListActivity : AppCompatActivity() {
         title = activityTitle
 
         // Fetch song list
-        val listOfSongs = mutableListOf<Song>()
+        val listOfSongs: MutableList<Song> = mutableListOf<Song>()
         listOfSongs.addAll(SongDataProvider.getAllSongs())
 
         // Create adapter (may want to save it as property)

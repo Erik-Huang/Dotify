@@ -6,13 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.view.animation.AnimationUtils
-import android.widget.TextView
 import android.widget.Toast
 import com.ericchee.songdataprovider.Song
-import com.ericchee.songdataprovider.SongDataProvider
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_song_list.*
+import kotlinx.android.synthetic.main.activity_song_player.*
 import kotlin.random.Random
 
 class SongPlayerActivity : AppCompatActivity() {
@@ -25,7 +21,7 @@ class SongPlayerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_song_player)
         initUI()
         // Grab data from Intent's Extras
         val songPlaying = intent.getParcelableExtra<Song>(SONG_KEY)
