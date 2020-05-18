@@ -15,7 +15,7 @@ class DotifyApp: Application() {
 
         musicManager = MusicManager()
 
-        apiManager = APIManager()
+        apiManager = APIManager(this)
     }
 
 }

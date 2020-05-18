@@ -6,13 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ericchee.songdataprovider.Song
 import com.syaphen.dotify.manager.OnSongClickListener
 
 import com.syaphen.dotify.R
 import com.syaphen.dotify.SongListAdapter
 import com.syaphen.dotify.DotifyApp
 import com.syaphen.dotify.manager.MusicManager
+import com.syaphen.dotify.model.Song
 import kotlinx.android.synthetic.main.fragment_song_list.*
 
 

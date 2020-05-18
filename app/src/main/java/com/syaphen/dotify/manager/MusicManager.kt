@@ -1,12 +1,16 @@
 package com.syaphen.dotify.manager
 
-import com.ericchee.songdataprovider.Song
-import com.ericchee.songdataprovider.SongDataProvider
+import com.syaphen.dotify.model.Song
+import kotlin.random.Random
 
 class MusicManager {
-    var listOfSongs: List<Song> = SongDataProvider.getAllSongs()
+    var listOfSongs: List<Song>
     var songPlaying: Song? = null
-    var playCount = 0
+    var playCount = Random.nextInt(10, 200)
+
+    init {
+        listOfSongs = emptyList()
+    }
 
     fun shuffle() {
         listOfSongs = listOfSongs.shuffled()

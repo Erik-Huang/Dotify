@@ -1,6 +1,6 @@
 package com.syaphen.dotify.manager
 
-import com.ericchee.songdataprovider.Song
+import com.syaphen.dotify.model.Song
 
 interface OnSongClickListener {
     fun onSongClicked(song: Song)

@@ -2,30 +2,46 @@ package com.syaphen.dotify.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import com.ericchee.songdataprovider.*
+import android.widget.Toast
 import com.syaphen.dotify.DotifyApp
 import com.syaphen.dotify.manager.OnSongClickListener
 import com.syaphen.dotify.R
 import com.syaphen.dotify.fragment.*
+import com.syaphen.dotify.manager.APIManager
 import com.syaphen.dotify.manager.MusicManager
+import com.syaphen.dotify.model.Song
 import kotlinx.android.synthetic.main.activity_master_main.*
 
 class MasterMainActivity : AppCompatActivity(),
     OnSongClickListener {
 
     private lateinit var musicManager: MusicManager
+    private lateinit var apiManager: APIManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_master_main)
         musicManager = (application as DotifyApp).musicManager
+        apiManager = (application as DotifyApp).apiManager
 
-        val songListFragment = SongListFragment.getInstance()
-        commitSongListFragment(songListFragment)
+        // populate the song list on the first launch
+        if (getSongListFragment() == null) {
+            apiManager.fetchSongs ({ songList ->
+                // Initialize song list fragment
+                musicManager.listOfSongs = songList
+                val songListFragment = SongListFragment.getInstance()
+                commitSongListFragment(songListFragment)
+            }, {
+                Toast.makeText(this, "Failed to fetch the song list", Toast.LENGTH_SHORT).show()
+            })
+        }
 
+        // Initialize mini player
         initializeMiniPlayer()
+
         // Handle MiniPlayer & Back Button: switching between fragments
         supportFragmentManager.addOnBackStackChangedListener {
             if(supportFragmentManager.backStackEntryCount > 0) {
@@ -74,8 +90,7 @@ class MasterMainActivity : AppCompatActivity(),
     }
 
     private fun commitNowPlayingFragment() {
-        var nowPlayingFragment = getNowPlayingFragment()
-        nowPlayingFragment = NowPlayingFragment.getInstance()
+        var nowPlayingFragment = NowPlayingFragment.getInstance()
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragContainer, nowPlayingFragment, NowPlayingFragment.TAG)

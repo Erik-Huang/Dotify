@@ -8,12 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.ericchee.songdataprovider.Song
 import com.syaphen.dotify.DotifyApp
 
 import com.syaphen.dotify.R
 import com.syaphen.dotify.manager.MusicManager
+import com.syaphen.dotify.model.Song
 import kotlinx.android.synthetic.main.fragment_now_playing.*
+import com.squareup.picasso.Picasso
 import kotlin.random.Random
 
 class NowPlayingFragment : Fragment() {
@@ -58,8 +59,8 @@ class NowPlayingFragment : Fragment() {
     private fun initUI() {
         albumTitle.text = songPlaying.title
         albumDescription.text = songPlaying.artist
-        playCountDisplay.text = "${musicManager.playCount} Plays"
-        albumDisplay.setImageResource(songPlaying.largeImageID)
+        playCountDisplay.text = "${musicManager.playCount} songs played"
+        Picasso.get().load(songPlaying.largeImageURL).into(albumDisplay)
         playBtn.setOnClickListener { v: View ->
             incPlayCount(v)
         }
@@ -73,13 +74,21 @@ class NowPlayingFragment : Fragment() {
 
     private fun incPlayCount(view: View) {
         musicManager.playCount += 1
-        playCountDisplay.text = "${musicManager.playCount} Plays"
+        playCountDisplay.text = "${musicManager.playCount} songs played"
     }
 
     private fun changeTrack(view: View, isNext: Boolean) {
-        var direction = if (isNext) 1 else -1
-        val currSongIndex = musicManager.listOfSongs.indexOf(songPlaying)
-        val nextSong = musicManager.listOfSongs[currSongIndex + direction]
+        val direction = if (isNext) 1 else -1
+        val listOfSongs = musicManager.listOfSongs
+        var songIndex = listOfSongs.indexOf(songPlaying)
+        if (songIndex == 0 && direction == -1) {
+            songIndex = listOfSongs.size - 1
+        } else if (songIndex == listOfSongs.size - 1 && direction == 1) {
+            songIndex = 0
+        } else {
+            songIndex += direction
+        }
+        val nextSong = listOfSongs[songIndex]
         musicManager.songPlaying = nextSong
         songPlaying = nextSong
         initUI()
