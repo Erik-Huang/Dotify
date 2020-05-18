@@ -1,6 +1,5 @@
 package com.syaphen.dotify
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,7 +31,11 @@ class SongListAdapter(initialListOfSongs: List<Song>): RecyclerView.Adapter<Song
 
     fun change (newListOfSongs: List<Song>) {
         // Animated way of applying updates to list
-        val callback = SongDiffCallback(listOfSongs, newListOfSongs)
+        val callback =
+            SongDiffCallback(
+                listOfSongs,
+                newListOfSongs
+            )
         val diffResult = DiffUtil.calculateDiff(callback)
         listOfSongs = newListOfSongs.toList()
         diffResult.dispatchUpdatesTo(this)

@@ -26,7 +26,8 @@ class SongListActivity : AppCompatActivity() {
         listOfSongs.addAll(SongDataProvider.getAllSongs())
 
         // Create adapter (may want to save it as property)
-        val songListAdapter = SongListAdapter(listOfSongs)
+        val songListAdapter =
+            SongListAdapter(listOfSongs)
 
         // Set on item Click for the adapter
         songListAdapter.onSongClickListener = { currentSong: Song ->

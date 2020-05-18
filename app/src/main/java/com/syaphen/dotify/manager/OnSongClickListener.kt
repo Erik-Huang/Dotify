@@ -1,4 +1,4 @@
-package com.syaphen.dotify
+package com.syaphen.dotify.manager
 
 import com.ericchee.songdataprovider.Song
 
